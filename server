@@ -1,0 +1,31 @@
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+
+// Configuración del servidor
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+// Conexión a MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Modelo de hábitos
+const Habit = mongoose.model("Habit", {
+  name: String,
+  completedDays: Number,
+});
+
+// Ruta para obtener todos los hábitos
+app.get("/api/habits", async (req, res) => {
+  const habits = await Habit.find();
+  res.json(habits);
+});
+
+// Iniciar el servidor
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
