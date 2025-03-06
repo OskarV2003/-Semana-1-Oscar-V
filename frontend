@@ -1,0 +1,34 @@
+npx create-next-app frontend
+cd frontend
+npm install @reduxjs/toolkit react-redux axios
+import { Provider } from "react-redux";
+import { store } from "../store/store";
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
+}
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchHabits } from "../store/habitsSlice";
+
+export default function Home() {
+  const dispatch = useDispatch();
+  const { habits, status } = useSelector((state) => state.habits);
+
+  useEffect(() => {
+    dispatch(fetchHabits());
+  }, [dispatch]);
+
+  return (
+    <div>
+      <h1>Lista de Hábitos</h1>
+      {status === "loading" && <p>Cargando...</p>}
+      {status === "succeeded" &&
+        habits.map((habit) => <p key={habit._id}>{habit.name}</p>)}
+    </div>
+  );
+}
