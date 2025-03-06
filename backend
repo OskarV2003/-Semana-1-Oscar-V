@@ -1,0 +1,3 @@
+npm init -y
+npm install express mongoose cors dotenv
+MONGO_URI=mongodb+srv://usuario:password@cluster.mongodb.net/habitsDB
