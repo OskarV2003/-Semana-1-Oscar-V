@@ -1,0 +1,22 @@
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+
+const habitsSlice = createSlice({
+  name: "habits",
+  initialState: [
+    { id: 1, name: "Leer 10 minutos", completed: false },
+    { id: 2, name: "Ejercicio diario", completed: false },
+  ],
+  reducers: {
+    addHabit: (state, action) => {
+      state.push({ id: Date.now(), name: action.payload, completed: false });
+    },
+  },
+});
+
+export const { addHabit } = habitsSlice.actions;
+
+export const store = configureStore({
+  reducer: {
+    habits: habitsSlice.reducer,
+  },
+});
