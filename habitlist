@@ -1,0 +1,18 @@
+import { useSelector } from "react-redux";
+
+export default function HabitList() {
+  const habits = useSelector((state) => state.habits);
+
+  return (
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Tus Hábitos</h2>
+      <ul>
+        {habits.map((habit) => (
+          <li key={habit.id} className="p-2 border-b">
+            {habit.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
