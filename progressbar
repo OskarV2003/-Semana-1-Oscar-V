@@ -1,0 +1,8 @@
+export default function ProgressBar() {
+    return (
+      <div className="w-full bg-gray-200 h-6 rounded-lg mt-4">
+        <div className="bg-red-500 h-6 rounded-lg w-1/6"></div>
+      </div>
+    );
+  }
+  
